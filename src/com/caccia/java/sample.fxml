@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.caccia.java.Controller">
+   <top>
+      <HBox>
+         <children>
+            <TextField fx:id="inputSummary" promptText="Summary" />
+            <TextField fx:id="inputPriority" promptText="Priority" />
+            <TextField fx:id="inputContext" promptText="Context" />
+          <Button fx:id="addTask" mnemonicParsing="false" text="+">
+               <tooltip>
+                  <Tooltip fx:id="addTaskTooltip" text="Add task" />
+               </tooltip>
+            </Button>
+            <Button fx:id="removeTask" mnemonicParsing="false" text="-">
+               <tooltip>
+                  <Tooltip fx:id="removeTaskTooltip" text="Remove task" />
+               </tooltip>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <TableView fx:id="taskTable" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="summaryColumn" text="Summary" />
+          <TableColumn fx:id="priorityColumn" text="Priority" />
+            <TableColumn fx:id="contextColumn" text="Context" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>
