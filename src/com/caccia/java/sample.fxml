@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.collections.FXCollections?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.caccia.java.Controller">
    <top>
       <HBox>
@@ -31,9 +33,11 @@
    <center>
       <TableView fx:id="taskTable" BorderPane.alignment="CENTER">
         <columns>
+            <!--TODO Am I doing this right?-->
           <TableColumn fx:id="summaryColumn" text="Summary" />
           <TableColumn fx:id="priorityColumn" text="Priority" />
             <TableColumn fx:id="contextColumn" text="Context" />
+            <TableColumn fx:id="createdColumn" prefWidth="75.0" text="Created" />
         </columns>
       </TableView>
    </center>

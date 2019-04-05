@@ -1,5 +1,7 @@
 package com.caccia.java;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,25 +11,24 @@ import java.time.format.DateTimeFormatter;
  */
 class Task {
 
-    private String summary;
-    private String priority;
-    private String context;
-    private String creationTime;
+    private SimpleStringProperty summary;
+    private SimpleStringProperty priority;
+    private SimpleStringProperty context;
+    private SimpleStringProperty creationTime;
 
     /**
      * This constructor is used when the program is running and creates a new task
-     *
      * @param summary  Contains the full task summary text String
      * @param priority Contains a numerical String value of between 1-3
      * @param context  Contains a String context where the task will be executed.
      */
-    public Task(String summary, String priority, String context) {
+    public Task(SimpleStringProperty summary, SimpleStringProperty priority, SimpleStringProperty context) {
         this.summary = summary;
         this.priority = priority;
         this.context = context;
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        this.creationTime = localTime.format(formatter);
+        this.creationTime = new SimpleStringProperty(localTime.format(formatter));
     }
 
     /**
@@ -40,7 +41,7 @@ class Task {
      * @param creationTime Accepts a String from the save file with the date/time which
      *                     overrides creation time stamping.
      */
-    public Task(String summary, String priority, String context, String creationTime) {
+    public Task(SimpleStringProperty summary, SimpleStringProperty priority, SimpleStringProperty context, SimpleStringProperty creationTime) {
         this.summary = summary;
         this.priority = priority;
         this.context = context;
@@ -51,43 +52,51 @@ class Task {
     }
 
     public String getSummary() {
+        return summary.get();
+    }
+
+    public SimpleStringProperty summaryProperty() {
         return summary;
     }
 
     public void setSummary(String summary) {
-        this.summary = summary;
+        this.summary.set(summary);
     }
 
     public String getPriority() {
+        return priority.get();
+    }
+
+    public SimpleStringProperty priorityProperty() {
         return priority;
     }
 
     public void setPriority(String priority) {
-        this.priority = priority;
+        this.priority.set(priority);
     }
 
     public String getContext() {
+        return context.get();
+    }
+
+    public SimpleStringProperty contextProperty() {
         return context;
     }
 
     public void setContext(String context) {
-        this.context = context;
+        this.context.set(context);
     }
 
     public String getCreationTime() {
+        return creationTime.get();
+    }
+
+    public SimpleStringProperty creationTimeProperty() {
         return creationTime;
     }
 
     public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    @Override
-    public String toString() {
-        return summary +
-                " | priority=" + priority +
-                " | context=" + context +
-                " | created=" + creationTime;
+        this.creationTime.set(creationTime);
     }
 }
 
