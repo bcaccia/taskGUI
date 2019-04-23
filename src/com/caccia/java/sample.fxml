@@ -5,11 +5,10 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.collections.FXCollections?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.caccia.java.Controller">
    <top>
       <HBox>
@@ -34,7 +33,7 @@
       <TableView fx:id="taskTable" BorderPane.alignment="CENTER">
         <columns>
             <!--TODO Am I doing this right?-->
-          <TableColumn fx:id="summaryColumn" text="Summary">
+          <TableColumn fx:id="summaryColumn" minWidth="200.0" prefWidth="200.0" text="Summary">
             <cellValueFactory><PropertyValueFactory property="summary" /></cellValueFactory>
           </TableColumn>
           <TableColumn fx:id="priorityColumn" text="Priority">
@@ -47,6 +46,9 @@
             <cellValueFactory><PropertyValueFactory property="creationTime" /></cellValueFactory>
             </TableColumn>
         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
    </center>
 </BorderPane>
