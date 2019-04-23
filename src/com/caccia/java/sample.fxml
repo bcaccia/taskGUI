@@ -30,10 +30,10 @@
       </HBox>
    </top>
    <center>
-      <TableView fx:id="taskTable" BorderPane.alignment="CENTER">
+      <TableView fx:id="taskTable" editable="true" BorderPane.alignment="CENTER">
         <columns>
             <!--TODO Am I doing this right?-->
-          <TableColumn fx:id="summaryColumn" minWidth="200.0" prefWidth="200.0" text="Summary">
+          <TableColumn fx:id="summaryColumn" editable="false" minWidth="200.0" prefWidth="200.0" text="Summary">
             <cellValueFactory><PropertyValueFactory property="summary" /></cellValueFactory>
           </TableColumn>
           <TableColumn fx:id="priorityColumn" text="Priority">
@@ -42,7 +42,7 @@
             <TableColumn fx:id="contextColumn" text="Context">
             <cellValueFactory><PropertyValueFactory property="context" /></cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="createdColumn" prefWidth="75.0" text="Created">
+            <TableColumn fx:id="createdColumn" editable="false" prefWidth="75.0" text="Created">
             <cellValueFactory><PropertyValueFactory property="creationTime" /></cellValueFactory>
             </TableColumn>
         </columns>
