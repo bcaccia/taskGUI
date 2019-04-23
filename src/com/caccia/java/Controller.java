@@ -113,7 +113,7 @@ public class Controller implements Initializable {
     /**
      * Write the taskList to a .csv tab delimited format file
      */
-    public void writeToFile() {
+    private void writeToFile() {
         BufferedWriter bw = null;
         FileWriter fw = null;
         final ArrayList<Task> taskList = new ArrayList<>(data);
@@ -147,7 +147,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void readFromFile() {
+    private void readFromFile() {
         BufferedReader br = null;
         File f = new File(".", FILENAME);
         String line;
