@@ -34,10 +34,18 @@
       <TableView fx:id="taskTable" BorderPane.alignment="CENTER">
         <columns>
             <!--TODO Am I doing this right?-->
-          <TableColumn fx:id="summaryColumn" text="Summary" />
-          <TableColumn fx:id="priorityColumn" text="Priority" />
-            <TableColumn fx:id="contextColumn" text="Context" />
-            <TableColumn fx:id="createdColumn" prefWidth="75.0" text="Created" />
+          <TableColumn fx:id="summaryColumn" text="Summary">
+            <cellValueFactory><PropertyValueFactory property="summary" /></cellValueFactory>
+          </TableColumn>
+          <TableColumn fx:id="priorityColumn" text="Priority">
+            <cellValueFactory><PropertyValueFactory property="priority" /></cellValueFactory>
+          </TableColumn>
+            <TableColumn fx:id="contextColumn" text="Context">
+            <cellValueFactory><PropertyValueFactory property="context" /></cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="createdColumn" prefWidth="75.0" text="Created">
+            <cellValueFactory><PropertyValueFactory property="creationTime" /></cellValueFactory>
+            </TableColumn>
         </columns>
       </TableView>
    </center>

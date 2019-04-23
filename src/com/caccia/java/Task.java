@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * This class defines the data structure of a task object. It is to be instantiated
  * and used within the TaskFactory class.
  */
-class Task {
+public class Task {
 
     private SimpleStringProperty summary;
     private SimpleStringProperty priority;
@@ -22,10 +22,10 @@ class Task {
      * @param priority Contains a numerical String value of between 1-3
      * @param context  Contains a String context where the task will be executed.
      */
-    public Task(SimpleStringProperty summary, SimpleStringProperty priority, SimpleStringProperty context) {
-        this.summary = summary;
-        this.priority = priority;
-        this.context = context;
+    public Task(String summary, String priority, String context) {
+        this.summary = new SimpleStringProperty(summary);
+        this.priority = new SimpleStringProperty(priority);
+        this.context = new SimpleStringProperty(context);
         LocalDateTime localTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.creationTime = new SimpleStringProperty(localTime.format(formatter));
@@ -41,11 +41,11 @@ class Task {
      * @param creationTime Accepts a String from the save file with the date/time which
      *                     overrides creation time stamping.
      */
-    public Task(SimpleStringProperty summary, SimpleStringProperty priority, SimpleStringProperty context, SimpleStringProperty creationTime) {
-        this.summary = summary;
-        this.priority = priority;
-        this.context = context;
-        this.creationTime = creationTime;
+    public Task(String summary, String priority, String context, String creationTime) {
+        this.summary = new SimpleStringProperty(summary);
+        this.priority = new SimpleStringProperty(priority);
+        this.context = new SimpleStringProperty(context);
+        this.creationTime = new SimpleStringProperty(creationTime);
     }
 
     public Task() {
