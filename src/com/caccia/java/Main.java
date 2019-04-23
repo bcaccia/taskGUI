@@ -14,6 +14,7 @@ public class Main extends Application {
         primaryStage.setTitle("tasko");
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();
+
     }
 
 

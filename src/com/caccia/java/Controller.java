@@ -7,10 +7,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    private static final String FILENAME = "taskList.csv";
+    private ObservableList<Task> data = FXCollections.observableArrayList();
 
     @FXML
     private ResourceBundle resources;
@@ -57,18 +62,21 @@ public class Controller implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        readFromFile();
+
         summaryColumn.setCellValueFactory(new PropertyValueFactory<>("summary"));
         priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priority"));
         contextColumn.setCellValueFactory(new PropertyValueFactory<>("context"));
         createdColumn.setCellValueFactory(new PropertyValueFactory<>("creationTime"));
 
 
-        taskTable.setItems(getTasks());
+        taskTable.setItems(data);
+
 
 //        Add a task when + is clicked in the UI
         addTask.setOnAction(e -> {
             if (!inputSummary.getText().equals("") && !inputPriority.getText().equals("") && !inputContext.getText().equals("")) {
-                ObservableList<Task> data = taskTable.getItems();
+                data = taskTable.getItems();
                 // Create a new task object and initialize with the data in the UI fields
                 Task newTask = new Task(inputSummary.getText(), inputPriority.getText(), inputContext.getText());
                 newTask.setSummary(inputSummary.getText());
@@ -76,6 +84,7 @@ public class Controller implements Initializable {
                 newTask.setContext(inputContext.getText());
 
                 data.add(newTask);
+                writeToFile();
 
 //                Clear out the text fields
                 inputSummary.setText("");
@@ -89,14 +98,86 @@ public class Controller implements Initializable {
         removeTask.setOnAction(e -> {
             Task selectedItem = taskTable.getSelectionModel().getSelectedItem();
             taskTable.getItems().remove(selectedItem);
+            writeToFile();
         });
 
     }
 
-    public ObservableList<Task> getTasks() {
+    private ObservableList<Task> getTasks() {
         ObservableList<Task> tasks = FXCollections.observableArrayList();
         Task newTask = new Task("hello", "1", "office");
         tasks.add(newTask);
         return tasks;
+    }
+
+    /**
+     * Write the taskList to a .csv tab delimited format file
+     */
+    public void writeToFile() {
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+        final ArrayList<Task> taskList = new ArrayList<>(data);
+
+        try {
+            fw = new FileWriter(FILENAME);
+            bw = new BufferedWriter(fw);
+
+            for (Task x :
+                    taskList) {
+                bw.write(x.getSummary() + "\t"
+                        + x.getPriority() + "\t"
+                        + x.getContext() + "\t"
+                        + x.getCreationTime() + "\n");
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bw != null)
+                    bw.close();
+
+                if (fw != null)
+                    fw.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void readFromFile() {
+        BufferedReader br = null;
+        File f = new File(".", FILENAME);
+        String line;
+        String splitBy = "\t";
+
+        // Check if the file exists first. If it doesn't, continue on with the execution of the program.
+        if (f.exists()) {
+            try {
+
+                br = new BufferedReader(new FileReader(FILENAME));
+
+
+                while ((line = br.readLine()) != null) {
+
+                    String[] rawTasks = line.split(splitBy);
+                    Task tempTask = new Task(rawTasks[0], rawTasks[1], rawTasks[2], rawTasks[3]);
+                    data.add(tempTask);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 }
