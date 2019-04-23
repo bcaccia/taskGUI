@@ -65,7 +65,7 @@ public class Controller implements Initializable {
 
         taskTable.setItems(getTasks());
 
-
+//        Add a task when + is clicked in the UI
         addTask.setOnAction(e -> {
             if (!inputSummary.getText().equals("") && !inputPriority.getText().equals("") && !inputContext.getText().equals("")) {
                 ObservableList<Task> data = taskTable.getItems();
@@ -83,6 +83,12 @@ public class Controller implements Initializable {
                 inputContext.setText("");
             }
 
+        });
+
+//        Remove a task when - is clicked in the UI
+        removeTask.setOnAction(e -> {
+            Task selectedItem = taskTable.getSelectionModel().getSelectedItem();
+            taskTable.getItems().remove(selectedItem);
         });
 
     }
