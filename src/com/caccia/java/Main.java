@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -11,6 +12,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+//        TODO add app icon
+//        primaryStage.getIcons().add(new Image("file:icon.png"));
         primaryStage.setTitle("tasko");
         primaryStage.setScene(new Scene(root, 640, 480));
         primaryStage.show();
